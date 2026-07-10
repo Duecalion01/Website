@@ -1,0 +1,968 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1e40af;
+    --secondary-color: #1f2937;
+    --accent-color: #fbbf24;
+    --danger-color: #ef4444;
+    --success-color: #10b981;
+    --light-gray: #f3f4f6;
+    --border-color: #e5e7eb;
+    --text-color: #111827;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.settings-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.3s;
+}
+
+.settings-btn:hover {
+    transform: rotate(20deg);
+}
+
+.cart-btn {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a8a 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: var(--text-color);
+}
+
+.search-box:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Sections */
+.matches-section,
+.teams-section,
+.contact-section {
+    padding: 4rem 2rem;
+}
+
+.matches-section {
+    background-color: white;
+}
+
+.teams-section {
+    background-color: var(--light-gray);
+}
+
+.contact-section {
+    background-color: white;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--border-color);
+    background-color: white;
+    color: var(--text-color);
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Match Grid */
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.match-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.match-card-header {
+    background: linear-gradient(135deg, var(--primary-color), #1e3a8a);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.match-teams {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.team-short {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.vs-text {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin: 0 1rem;
+}
+
+.match-date {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.match-card-body {
+    padding: 1.5rem;
+}
+
+.match-card-info {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.match-card-info strong {
+    color: var(--text-color);
+}
+
+.available-seats {
+    color: var(--success-color);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.available-seats.low {
+    color: var(--danger-color);
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #1e3a8a;
+    transform: scale(1.02);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--border-color);
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content.seat-selection {
+    max-width: 900px;
+}
+
+.close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: var(--text-color);
+}
+
+/* Match Details */
+.match-details h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: var(--light-gray);
+    border-radius: 0.5rem;
+}
+
+.team-info {
+    text-align: center;
+    flex: 1;
+}
+
+.team-info h2 {
+    margin: 0;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.team-logo {
+    font-size: 3rem;
+    margin: 1rem 0;
+}
+
+.vs {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0 2rem;
+}
+
+.match-info {
+    margin-bottom: 2rem;
+}
+
+.match-info p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Stadium View */
+.stadium-view {
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    display: grid;
+    gap: 0.5rem;
+    justify-items: center;
+}
+
+.stadium-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.stadium-section h3 {
+    margin-bottom: 1rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.seats-row {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.seat.available {
+    background-color: white;
+    border-color: var(--border-color);
+}
+
+.seat.available:hover {
+    background-color: var(--light-gray);
+    border-color: var(--primary-color);
+}
+
+.seat.selected {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.seat.booked {
+    background-color: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+    border-color: #9ca3af;
+}
+
+.seat.vip {
+    background-color: var(--accent-color);
+    border-color: #f59e0b;
+}
+
+.seat.vip.selected {
+    background-color: #d97706;
+    border-color: #d97706;
+}
+
+/* Seat Legend */
+.seat-legend {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.seat-legend span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.seat-legend .seat {
+    width: 20px;
+    height: 20px;
+    cursor: default;
+}
+
+/* Seat Summary */
+.seat-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.seat-summary h3 {
+    margin-bottom: 1rem;
+}
+
+.seat-summary p {
+    margin-bottom: 0.5rem;
+}
+
+.seat-summary .total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 1rem;
+}
+
+#selected-seats-list {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+#subtotal,
+#total,
+#ticket-count {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Cart Items */
+.cart-items {
+    margin-bottom: 2rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: var(--light-gray);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.cart-item-info h3 {
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-info p {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.remove-btn {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+    background-color: #dc2626;
+}
+
+.cart-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+}
+
+.cart-summary {
+    background-color: var(--light-gray);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.cart-summary h3 {
+    margin-bottom: 1rem;
+}
+
+#cart-total {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Checkout Form */
+#checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Teams Grid */
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.team-card {
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.team-card-header {
+    background: linear-gradient(135deg, var(--primary-color), #1e3a8a);
+    color: white;
+    padding: 2rem 1rem;
+}
+
+.team-card-logo {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.team-card-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.team-card-body {
+    padding: 1.5rem;
+}
+
+.team-card-body p {
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+/* Contact Section */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.contact-info h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Success Message */
+.success-message {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.success-message.show {
+    display: block;
+}
+
+/* Settings Content */
+.settings-content {
+    padding: 1rem 0;
+}
+
+.settings-content p {
+    margin-bottom: 1.5rem;
+    color: #6b7280;
+}
+
+.api-provider {
+    background-color: var(--light-gray);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.api-provider h3 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.api-provider ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.api-provider li {
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+}
+
+.api-provider a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.api-provider a:hover {
+    text-decoration: underline;
+}
+
+#api-key-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+#api-key-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.api-status {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.api-status p {
+    margin-bottom: 1rem;
+}
+
+#api-status {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .settings-btn {
+        font-size: 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .match-card-header {
+        padding: 1rem;
+    }
+
+    .matches-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .match-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .vs {
+        transform: rotate(90deg);
+        margin: 0;
+    }
+
+    .seat-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .seat {
+        width: 25px;
+        height: 25px;
+        font-size: 0.6rem;
+    }
+
+    .team-card-logo {
+        font-size: 3rem;
+    }
+
+    .api-provider {
+        padding: 1rem;
+    }
+
+    .api-provider ol {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links a {
+        display: none;
+    }
+
+    .settings-btn {
+        font-size: 0.9rem;
+        padding: 0.25rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .filter-buttons {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .match-teams {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .vs-text {
+        margin: 0;
+    }
+
+    .teams-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-content {
+        font-size: 0.9rem;
+    }
+
+    .api-provider {
+        padding: 1rem;
+    }
+
+    .api-provider ol {
+        font-size: 0.85rem;
+    }
+}

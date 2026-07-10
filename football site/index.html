@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FootballTickets - Book Your Match Tickets</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">⚽ FootballTickets</div>
+            <div class="nav-links">
+                <a href="#matches">Matches</a>
+                <a href="#teams">Teams</a>
+                <a href="#contact">Contact</a>
+                <button class="settings-btn" onclick="openSettings()" title="API Settings">⚙️</button>
+                <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Book Your Football Match Tickets</h1>
+            <p>Don't miss the action! Secure your seats now for the biggest matches</p>
+            <input type="text" id="search-box" placeholder="Search matches, teams, or stadiums..." class="search-box">
+        </div>
+    </section>
+
+    <!-- Matches Section -->
+    <section id="matches" class="matches-section">
+        <div class="container">
+            <h2>Upcoming Matches</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" onclick="filterMatches('all')">All</button>
+                <button class="filter-btn" data-filter="today" onclick="filterMatches('today')">Today</button>
+                <button class="filter-btn" data-filter="week" onclick="filterMatches('week')">This Week</button>
+                <button class="filter-btn" data-filter="upcoming" onclick="filterMatches('upcoming')">Upcoming</button>
+            </div>
+            <div id="filter-status" class="filter-status">Showing: All matches</div>
+            <div id="matches-grid" class="matches-grid">
+                <!-- Matches will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Match Details Modal -->
+    <div id="match-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMatchModal()">&times;</span>
+            <div class="match-details">
+                <div class="match-header">
+                    <div class="team-info">
+                        <h2 id="team1-name"></h2>
+                        <p id="team1-logo" class="team-logo"></p>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="team-info">
+                        <h2 id="team2-name"></h2>
+                        <p id="team2-logo" class="team-logo"></p>
+                    </div>
+                </div>
+                <div class="match-info">
+                    <p><strong>Date:</strong> <span id="match-date"></span></p>
+                    <p><strong>Stadium:</strong> <span id="match-stadium"></span></p>
+                    <p><strong>Capacity:</strong> <span id="match-capacity"></span></p>
+                    <p><strong>Competition:</strong> <span id="match-competition"></span></p>
+                </div>
+                <button onclick="openSeatSelection()" class="btn-primary">Select Seats</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seat Selection Modal -->
+    <div id="seat-modal" class="modal">
+        <div class="modal-content seat-selection">
+            <span class="close" onclick="closeSeatModal()">&times;</span>
+            <h2>Select Your Seats</h2>
+            <div class="seat-legend">
+                <span><span class="seat available"></span> Available</span>
+                <span><span class="seat selected"></span> Selected</span>
+                <span><span class="seat booked"></span> Booked</span>
+                <span><span class="seat vip"></span> VIP</span>
+            </div>
+            
+            <div id="stadium-view" class="stadium-view">
+                <!-- Seats will be generated here -->
+            </div>
+            
+            <div class="seat-summary">
+                <div>
+                    <h3>Selected Seats</h3>
+                    <p id="selected-seats-list">No seats selected</p>
+                </div>
+                <div>
+                    <h3>Summary</h3>
+                    <p>Tickets: <span id="ticket-count">0</span></p>
+                    <p>Subtotal: $<span id="subtotal">0</span></p>
+                    <p class="total">Total: $<span id="total">0</span></p>
+                    <button onclick="addToCart()" class="btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be populated here -->
+            </div>
+            <div class="cart-summary">
+                <h3>Total: $<span id="cart-total">0</span></h3>
+                <button onclick="checkout()" class="btn-primary btn-large">Proceed to Checkout</button>
+                <button onclick="closeCart()" class="btn-secondary">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCheckout()">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form" onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" required placeholder="1234 5678 9012 3456" pattern="[0-9\s]{16,}">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" required placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" required placeholder="123" pattern="[0-9]{3}">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary btn-large">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSettings()">&times;</span>
+            <h2>API Configuration</h2>
+            <div class="settings-content">
+                <p>Configure your football API key to load real live matches.</p>
+                
+                <div class="api-provider">
+                    <h3>Option 1: API-Football (Recommended)</h3>
+                    <ol>
+                        <li>Visit <a href="https://rapidapi.com/api-sports/api/api-football" target="_blank">RapidAPI - API-Football</a></li>
+                        <li>Sign up for free account</li>
+                        <li>Subscribe to API-Football (free tier available)</li>
+                        <li>Copy your API key from the dashboard</li>
+                        <li>Paste it below</li>
+                    </ol>
+                    <input type="password" id="api-key-input" placeholder="Paste your API key here" value="">
+                    <button class="btn-primary" onclick="saveApiKey()">Save API Key</button>
+                </div>
+
+                <div class="api-provider">
+                    <h3>Option 2: Football-Data.org</h3>
+                    <ol>
+                        <li>Visit <a href="https://www.football-data.org" target="_blank">Football-Data.org</a></li>
+                        <li>Register for free</li>
+                        <li>Get your API token</li>
+                        <li>Paste it in the input above (it will auto-detect)</li>
+                    </ol>
+                </div>
+
+                <div class="api-status">
+                    <p><strong>Current Status:</strong> <span id="api-status">Using sample data (API key not configured)</span></p>
+                    <button class="btn-secondary" onclick="reloadMatches()">Reload Matches</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teams Section -->
+    <section id="teams" class="teams-section">
+        <div class="container">
+            <h2>Premier League Teams</h2>
+            <div class="teams-grid">
+                <!-- Teams will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p><strong>Email:</strong> support@footballtickets.com</p>
+                    <p><strong>Phone:</strong> 1-800-TICKETS</p>
+                    <p><strong>Hours:</strong> Mon-Fri 9AM-6PM EST</p>
+                </div>
+                <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 FootballTickets. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
